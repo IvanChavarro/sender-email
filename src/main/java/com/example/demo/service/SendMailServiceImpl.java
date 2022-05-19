@@ -37,7 +37,7 @@ public class SendMailServiceImpl implements SendMailService {
 			javaMailSender.send(mailMessage);
 
 		} catch (Exception e) {
-			log.info(e.toString());
+			log.info("error "+e.toString());
 		}
 
 	}
