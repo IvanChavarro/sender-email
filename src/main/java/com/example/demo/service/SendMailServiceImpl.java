@@ -4,8 +4,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -19,16 +17,18 @@ public class SendMailServiceImpl implements SendMailService {
 
 	@Override
 	public void sendMail(MailSenderDTO senderDTO) throws MessagingException {
-		MimeMessage message = javaMailSender.createMimeMessage();
-	  	
-	  	   
-  		MimeMessageHelper helper = new MimeMessageHelper(message, true);
-  		helper.setTo(senderDTO.getPara());
-  		helper.setSubject(senderDTO.getAsunto());
-  		helper.setText(String.format(senderDTO.getMensaje()));
-  		
-  		
-  		javaMailSender.send(message);
+		try {
+			MimeMessage message = javaMailSender.createMimeMessage();
+
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setTo(senderDTO.getPara());
+			helper.setSubject(senderDTO.getAsunto());
+			helper.setText(String.format(senderDTO.getMensaje()));
+
+			javaMailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
