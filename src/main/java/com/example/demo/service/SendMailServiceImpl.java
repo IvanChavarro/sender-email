@@ -17,18 +17,16 @@ public class SendMailServiceImpl implements SendMailService {
 
 	@Override
 	public void sendMail(MailSenderDTO senderDTO) throws MessagingException {
-		try {
-			MimeMessage message = javaMailSender.createMimeMessage();
 
-			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			helper.setTo(senderDTO.getPara());
-			helper.setSubject(senderDTO.getAsunto());
-			helper.setText(String.format(senderDTO.getMensaje()));
+		MimeMessage message = javaMailSender.createMimeMessage();
 
-			javaMailSender.send(message);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		helper.setTo(senderDTO.getPara());
+		helper.setSubject(senderDTO.getAsunto());
+		helper.setText(String.format(senderDTO.getMensaje()));
+
+		javaMailSender.send(message);
+
 	}
 
 }
