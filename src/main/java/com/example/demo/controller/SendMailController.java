@@ -21,7 +21,7 @@ public class SendMailController {
 	private SendMailService service;
 
 	@PostMapping
-	public ResponseEntity<?> sendMail(@RequestBody MailSenderDTO dto) throws MessagingException {
+	public ResponseEntity<?> sendMail(@RequestBody MailSenderDTO dto) throws Exception {
 		service.sendMail(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
