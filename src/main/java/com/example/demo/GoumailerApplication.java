@@ -10,17 +10,26 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * 
+ * @author Iván David Chavarro Durán
+ *
+ */
 @SpringBootApplication
 @EnableSwagger2
 public class GoumailerApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(GoumailerApplication.class, args);
 	}
 
-	  @Bean
-	    public Docket productApi() {
-	        return new Docket(DocumentationType.SWAGGER_2).select()
-	                .apis(RequestHandlerSelectors.basePackage("com.example")).paths(PathSelectors.any()).build();
-	    }
+	/**
+	 * Constructor swagger
+	 * 
+	 * @return el Swagger de la API
+	 */
+	@Bean
+	public Docket productApi() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.example"))
+				.paths(PathSelectors.any()).build();
+	}
 }
